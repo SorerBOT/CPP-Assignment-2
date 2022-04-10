@@ -72,3 +72,5 @@ int Account::GetNumOfTransactions() { return this->m_numberOfTransaction; }
 int Account::GetTotalPersons() const { return this->m_totalPersons; }
 Transaction **Account::GetTransactions() { return this->m_transactionList; }
 
+void Account::SetAccountNumber(int number) { this->m_accountNumber = number; }
+void Account::SetBalance(double balance) { this->m_balance = balance; }
