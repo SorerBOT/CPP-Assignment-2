@@ -81,7 +81,6 @@ void Account::SetPersons(Person **persons, int count) {
         delete this->m_persons[iteration];
     }
     delete[] this->m_persons;
-
     this->m_totalPersons = count;
     this->m_persons = new Person*[this->m_totalPersons];
     for (iteration = 0; iteration < this->m_totalPersons; iteration++) {
@@ -101,4 +100,21 @@ void Account::SetTransactions(Transaction **newTransaction, int count) {
     for (iteration = 0; iteration < this->m_numberOfTransaction; iteration++) {
         this->m_transactionList[iteration] = new Transaction(*newTransaction[iteration]);
     }
+}
+
+void Account::clearPersons() {
+    int iteration;
+    for (iteration = 0; iteration < this->m_totalPersons; iteration++) {
+        delete this->m_persons[iteration];
+    }
+    delete[] this->m_persons;
+    this->m_totalPersons = 0;
+}
+
+void Account::clearTransactions() {
+    int iteration;
+    for (iteration = 0; iteration < this->m_numberOfTransaction; iteration++) {
+        delete this->m_transactionList[iteration];
+    }
+    delete[] this->m_transactionList;
 }
