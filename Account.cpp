@@ -52,3 +52,15 @@ Account::Account(Person **persons, int count, double balance) {
         this->m_persons[iteration] = new Person(*persons[iteration]);
     }
 }
+Account::~Account() {
+    int iteration;
+    for (iteration = 0; iteration < this->m_numberOfTransaction; iteration++) {
+        delete this->m_persons[iteration];
+    }
+    delete[] this->m_persons;
+
+    for (iteration = 0; iteration < this->m_totalPersons; iteration++) {
+        delete this->m_transactionList[iteration];
+    }
+    delete[] this->m_transactionList;
+}
