@@ -88,3 +88,17 @@ void Account::SetPersons(Person **persons, int count) {
         this->m_persons[iteration] = new Person(*persons[iteration]);
     }
 }
+
+void Account::SetTransactions(Transaction **newTransaction, int count) {
+    int iteration;
+    for (iteration = 0; iteration < this->m_numberOfTransaction; iteration++) {
+        delete this->m_transactionList[iteration];
+    }
+    delete this->m_transactionList;
+
+    this->m_numberOfTransaction = count;
+    this->m_transactionList = new Transaction*[this->m_numberOfTransaction];
+    for (iteration = 0; iteration < this->m_numberOfTransaction; iteration++) {
+        this->m_transactionList[iteration] = new Transaction(*newTransaction[iteration]);
+    }
+}
