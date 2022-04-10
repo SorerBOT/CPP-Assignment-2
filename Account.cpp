@@ -29,3 +29,13 @@ Account::Account(const Account &other) {
         this->m_transactionList[iteration] = new Transaction(*other.m_transactionList[iteration]);
     }
 }
+Account::Account(const Person &person, double balance) {
+    this->m_numberOfTransaction = 0;
+    this->m_transactionList = NULL;
+    this->m_accountNumber = 0;
+    this->m_balance = balance;
+    this->m_totalPersons = 1;
+
+    this->m_persons = new Person*[this->m_totalPersons];
+    this->m_persons[0] = new Person(person);
+}
