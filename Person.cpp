@@ -17,3 +17,4 @@ Person::Person(const Person &other) {
 }
 Person::~Person() = default;
 void Person::SetId(int newId) { this->m_id = newId; }
+void Person::SetName(const char* newName) {  strcpy(this->m_name, newName); }
