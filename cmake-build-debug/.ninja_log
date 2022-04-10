@@ -1,0 +1,6 @@
+# ninja log v5
+2	53	1649581442861765384	CMakeFiles/Assignment2.dir/Transaction.cpp.o	50171aa0928f481b
+1	327	1649581443137765809	CMakeFiles/Assignment2.dir/Bank.cpp.o	d541d7198796992e
+1	377	1649581443185765883	CMakeFiles/Assignment2.dir/Account.cpp.o	c529253ae560ac88
+1	396	1649581443205765914	CMakeFiles/Assignment2.dir/Person.cpp.o	a7fd58653ee4939c
+0	446	1649581443253765988	CMakeFiles/Assignment2.dir/main.cpp.o	d8689b0968391969
