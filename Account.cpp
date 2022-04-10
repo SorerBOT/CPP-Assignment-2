@@ -64,3 +64,11 @@ Account::~Account() {
     }
     delete[] this->m_transactionList;
 }
+
+Person** Account::GetPersons() const { return this->m_persons; }
+int Account::GetAccountNumber() const { return this->m_accountNumber; }
+double Account::GetBalance() const { return this->m_balance; }
+int Account::GetNumOfTransactions() { return this->m_numberOfTransaction; }
+int Account::GetTotalPersons() const { return this->m_totalPersons; }
+Transaction **Account::GetTransactions() { return this->m_transactionList; }
+
