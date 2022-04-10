@@ -74,3 +74,17 @@ Transaction **Account::GetTransactions() { return this->m_transactionList; }
 
 void Account::SetAccountNumber(int number) { this->m_accountNumber = number; }
 void Account::SetBalance(double balance) { this->m_balance = balance; }
+
+void Account::SetPersons(Person **persons, int count) {
+    int iteration;
+    for (iteration = 0; iteration < this->m_totalPersons; iteration++) {
+        delete this->m_persons[iteration];
+    }
+    delete[] this->m_persons;
+
+    this->m_totalPersons = count;
+    this->m_persons = new Person*[this->m_totalPersons];
+    for (iteration = 0; iteration < this->m_totalPersons; iteration++) {
+        this->m_persons[iteration] = new Person(*persons[iteration]);
+    }
+}
