@@ -16,3 +16,4 @@ Person::Person(const Person &other) {
     this->m_id = other.m_id;
 }
 Person::~Person() = default;
+void Person::SetId(int newId) { this->m_id = newId; }
