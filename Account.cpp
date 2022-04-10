@@ -39,3 +39,16 @@ Account::Account(const Person &person, double balance) {
     this->m_persons = new Person*[this->m_totalPersons];
     this->m_persons[0] = new Person(person);
 }
+Account::Account(Person **persons, int count, double balance) {
+    int iteration;
+    this->m_numberOfTransaction = 0;
+    this->m_transactionList = NULL;
+    this->m_accountNumber = 0;
+    this->m_balance = balance;
+    this->m_totalPersons = count;
+
+    this->m_persons = new Person*[this->m_totalPersons];
+    for (iteration = 0; iteration < this->m_totalPersons; iteration++) {
+        this->m_persons[iteration] = new Person(*persons[iteration]);
+    }
+}
