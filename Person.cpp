@@ -15,3 +15,4 @@ Person::Person(const Person &other) {
     strcpy(this->m_name, other.m_name);
     this->m_id = other.m_id;
 }
+Person::~Person() = default;
