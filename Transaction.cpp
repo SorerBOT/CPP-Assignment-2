@@ -29,3 +29,16 @@ void Transaction::SetDes(Account* dst) {
 void Transaction::SetSource(Account* src) {
     this->m_source = src;
 }
+
+Account* Transaction::GetSource() const {
+    return this->m_source;
+}
+Account* Transaction::GetDes() const {
+    return this->m_destination;
+}
+double Transaction::GetAmount() const {
+    return this->m_amount;
+}
+char* Transaction::GetDate() const {
+    return this->m_date;
+}

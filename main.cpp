@@ -5,7 +5,6 @@ using namespace std;
 
 int main() //Train
 {
-
 //    Bank bank( "The First International Bank of Israel​ Ltd", 31 );
 //    Account account;
 //    Person lior( "Lior Li", 20145876 );

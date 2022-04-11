@@ -118,3 +118,19 @@ void Account::clearTransactions() {
     }
     delete[] this->m_transactionList;
 }
+void Account::AddPerson(const Person &newPerson, double amount) {
+    int iteration;
+    Person** personArray = new Person*[this->m_totalPersons + 1];
+    for (iteration = 0; iteration < this->m_totalPersons; iteration++) {
+        personArray[iteration] = new Person(*this->m_persons[iteration]);
+    }
+    personArray[this->m_totalPersons] = new Person(newPerson);
+    this->SetPersons(personArray, this->m_totalPersons + 1);
+}
+
+
+
+
+void Account::Withdraw(double amount, const char* date) {
+
+}
