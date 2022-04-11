@@ -3,7 +3,6 @@
 //
 
 #include "Account.h"
-
 Account::Account() {
     this->m_transactionList = NULL;
     this->m_numberOfTransaction = 0;
@@ -120,17 +119,33 @@ void Account::clearTransactions() {
 }
 void Account::AddPerson(const Person &newPerson, double amount) {
     int iteration;
-    Person** personArray = new Person*[this->m_totalPersons + 1];
-    for (iteration = 0; iteration < this->m_totalPersons; iteration++) {
-        personArray[iteration] = new Person(*this->m_persons[iteration]);
-    }
+    for (iteration = 0; iteration < this->m_totalPersons; iteration++) if (this->m_persons[iteration]->GetId() == newPerson.GetId()) return;
+    auto** personArray = new Person*[this->m_totalPersons + 1];
+    for (iteration = 0; iteration < this->m_totalPersons; iteration++) personArray[iteration] = new Person(*this->m_persons[iteration]);
     personArray[this->m_totalPersons] = new Person(newPerson);
     this->SetPersons(personArray, this->m_totalPersons + 1);
+    this->SetBalance(this->GetBalance() + amount);
+    for (iteration = 0; iteration < this->m_totalPersons; iteration++) delete personArray[iteration];
+    delete[] personArray;
 }
+void Account::AddTransaction(const Transaction &newTransaction) {
+    int iteration;
+    auto** transactionArray = new Transaction*[newTransaction.GetSource()->m_numberOfTransaction + 1];
+    for (iteration = 0; iteration < newTransaction.GetSource()->m_numberOfTransaction; iteration++) {
+        transactionArray[iteration] = new Transaction(*newTransaction.GetSource()->m_transactionList[iteration]);
+    }
+    transactionArray[newTransaction.GetSource()->m_numberOfTransaction] = new Transaction(newTransaction.GetSource(), newTransaction.GetDes(), newTransaction.GetAmount(), newTransaction.GetDate());
+    newTransaction.GetSource()->SetTransactions(transactionArray, newTransaction.GetSource()->m_numberOfTransaction + 1);
 
-
-
-
-void Account::Withdraw(double amount, const char* date) {
-
+    for (iteration = 0; iteration < newTransaction.GetSource()->m_numberOfTransaction; iteration++) delete newTransaction.GetSource()->m_transactionList[iteration];
+    delete[] transactionArray;
+    if (newTransaction.GetSource()->m_accountNumber == newTransaction.GetDes()->m_accountNumber) return;
+    transactionArray = new Transaction*[newTransaction.GetDes()->m_numberOfTransaction + 1];
+    for (iteration = 0; iteration < newTransaction.GetDes()->m_numberOfTransaction; iteration++) {
+        transactionArray[iteration] = new Transaction(*newTransaction.GetDes()->m_transactionList[iteration]);
+    }
+    transactionArray[newTransaction.GetDes()->m_numberOfTransaction] = new Transaction(newTransaction.GetSource(), newTransaction.GetDes(), newTransaction.GetAmount(), newTransaction.GetDate());
+    newTransaction.GetDes()->SetTransactions(transactionArray, newTransaction.GetDes()->m_numberOfTransaction + 1);
+    for (iteration = 0; iteration < newTransaction.GetDes()->m_numberOfTransaction; iteration++) delete newTransaction.GetSource()->m_transactionList[iteration];
+    delete[] transactionArray;
 }
