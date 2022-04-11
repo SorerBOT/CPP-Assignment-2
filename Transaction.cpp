@@ -10,3 +10,9 @@ Transaction::Transaction(Account *s, Account *d, double amount, const char *date
     this->m_amount = amount;
     strcpy(this->m_date, date);
 }
+Transaction::Transaction(const Transaction &other): m_date(NULL){
+    this->m_source = other.m_source;
+    this->m_destination = other.m_destination;
+    this->m_amount = other.m_amount;
+    strcpy(this->m_date, other.m_date);
+}
