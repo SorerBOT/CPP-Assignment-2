@@ -149,3 +149,19 @@ void Account::AddTransaction(const Transaction &newTransaction) {
     for (iteration = 0; iteration < newTransaction.GetDes()->m_numberOfTransaction; iteration++) delete newTransaction.GetSource()->m_transactionList[iteration];
     delete[] transactionArray;
 }
+void Account::DeletePerson(const Person &oldPerson) {
+    int iteration, indicator = 0;
+    for (iteration = 0; iteration < this->m_totalPersons; iteration++) {
+        if (this->m_persons[iteration]->GetId() == oldPerson.GetId()) { indicator = 1; break; }
+    }
+    if (!indicator) return;
+    auto** personArray = new Person*[this->m_totalPersons];
+    for (iteration = 0; iteration < this->m_totalPersons; iteration++) {
+        if (this->m_persons[iteration]->GetId() == oldPerson.GetId()) { indicator = 1; continue; }
+        personArray[iteration] = new Person(*this->m_persons[iteration]);
+    }
+    this->SetPersons(personArray, this->m_totalPersons - 1);
+
+    for (iteration = 0; iteration < this->m_totalPersons; iteration++) delete this->m_persons[iteration];
+    delete[] this->m_persons;
+}
