@@ -40,3 +40,8 @@ void Bank::SetAccount(Account **account, int numbeOfAccounts) {
     delete[] account;
 }
 
+const char* Bank::GetBankName() const { return this->m_name; }
+Account** Bank::GetAccounts() const { return this->m_account; }
+int Bank::GetNumberOfAccounts() const { return this->m_numbeOfAccounts; }
+double Bank::GetTotal() const { return this->m_totalBalance; }
+int Bank::GetCode() const { return this->m_bankCode; }
