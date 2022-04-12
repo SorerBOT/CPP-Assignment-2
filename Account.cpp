@@ -165,3 +165,13 @@ void Account::DeletePerson(const Person &oldPerson) {
     for (iteration = 0; iteration < this->m_totalPersons; iteration++) delete this->m_persons[iteration];
     delete[] this->m_persons;
 }
+void Account::Withdraw(double amount, const char *date) {
+    this->SetBalance(this->m_balance - amount);
+    Transaction transaction(this, this, -1 * amount, date);
+    this->AddTransaction(transaction);
+}
+void Account::Deposit(double amount, const char *date) {
+    this->SetBalance(this->m_balance + amount);
+    Transaction transaction(this, this, amount, date);
+    this->AddTransaction(transaction);
+}
