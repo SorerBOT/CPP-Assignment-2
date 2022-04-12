@@ -45,3 +45,13 @@ Account** Bank::GetAccounts() const { return this->m_account; }
 int Bank::GetNumberOfAccounts() const { return this->m_numbeOfAccounts; }
 double Bank::GetTotal() const { return this->m_totalBalance; }
 int Bank::GetCode() const { return this->m_bankCode; }
+
+void Bank::AddAccount(const Account &account) {
+    int iteration;
+    auto** accountsArray = new Account*[this->m_numbeOfAccounts + 1];
+    for (iteration = 0; iteration < this->m_numbeOfAccounts; iteration++) accountsArray[iteration] = new Account(*this->m_account[iteration]);
+    accountsArray[this->m_numbeOfAccounts] = new Account(account);
+    this->SetAccount(accountsArray, this->m_numbeOfAccounts + 1);
+    for (iteration = 0; iteration < this->m_numbeOfAccounts; iteration++) delete accountsArray[iteration];
+    delete[] accountsArray;
+}
