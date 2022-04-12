@@ -34,7 +34,6 @@ Account::Account(const Person &person, double balance) {
     this->m_accountNumber = 0;
     this->m_balance = balance;
     this->m_totalPersons = 1;
-
     this->m_persons = new Person*[this->m_totalPersons];
     this->m_persons[0] = new Person(person);
 }
@@ -155,15 +154,16 @@ void Account::DeletePerson(const Person &oldPerson) {
         if (this->m_persons[iteration]->GetId() == oldPerson.GetId()) { indicator = 1; break; }
     }
     if (!indicator) return;
-    auto** personArray = new Person*[this->m_totalPersons];
+    if (m_totalPersons == 1) {  delete this->m_persons[0]; delete[] m_persons; return;}
+    auto** personArray = new Person*[this->m_totalPersons - 1];
     for (iteration = 0; iteration < this->m_totalPersons; iteration++) {
         if (this->m_persons[iteration]->GetId() == oldPerson.GetId()) { indicator = 1; continue; }
         personArray[iteration] = new Person(*this->m_persons[iteration]);
     }
     this->SetPersons(personArray, this->m_totalPersons - 1);
 
-    for (iteration = 0; iteration < this->m_totalPersons; iteration++) delete this->m_persons[iteration];
-    delete[] this->m_persons;
+    for (iteration = 0; iteration < this->m_totalPersons; iteration++) delete personArray[iteration];
+    delete[] personArray;
 }
 void Account::Withdraw(double amount, const char *date) {
     this->SetBalance(this->m_balance - amount);

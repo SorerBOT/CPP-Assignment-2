@@ -16,14 +16,14 @@ Bank::Bank(const char *name, int code) {
     this->m_numbeOfAccounts = 0;
     this->m_totalBalance = 0;
     this->m_bankCode = code;
-    strcpy(this->m_name, name);
+    this->m_name = strdup(name);
 }
 Bank::~Bank() {
     int iteration;
     for (iteration = 0; iteration < this->m_numbeOfAccounts; iteration++) delete this->m_account[iteration];
     delete[] this->m_account;
 }
-void Bank::SetBankName(const char *name) { strcpy(this->m_name, name); }
+void Bank::SetBankName(const char *name) { this->m_name = strdup(name); }
 void Bank::SetCode(int code)             { this->m_bankCode = code; }
 void Bank::SetTotal(double total) { this->m_totalBalance = total; }
 void Bank::SetAccount(Account **account, int numbeOfAccounts) {
@@ -55,4 +55,25 @@ void Bank::AddAccount(const Account &account) {
     this->SetAccount(accountsArray, this->m_numbeOfAccounts + 1);
     for (iteration = 0; iteration < this->m_numbeOfAccounts; iteration++) delete accountsArray[iteration];
     delete[] accountsArray;
+}
+void Bank::AddAccount(const Person &per, double amount) {
+    Account account(per, amount);
+    AddAccount(account);
+}
+void Bank::AddPerson(const Person &newPerson, const Account &account, double amount) {
+    int iteration, indicator, index;
+    bool flag = false;
+    for (iteration = 0; iteration < this->m_numbeOfAccounts; iteration++) {
+        if (this->m_account[iteration]->GetAccountNumber() != account.GetAccountNumber()) continue;
+        for (indicator = 0; indicator < this->m_account[iteration]->GetTotalPersons(); iteration++) {
+            if (this->m_account[iteration]->GetPersons()[indicator]->GetId() == newPerson.GetId()) return;
+        }
+        index = iteration;
+        flag = true;
+        break;
+    }
+    if (flag) { this->m_account[index]->AddPerson(newPerson, amount); return; }
+    Account acc(newPerson, amount);
+    this->AddAccount(acc);
+    this->SetTotal(this->GetTotal() + amount);
 }

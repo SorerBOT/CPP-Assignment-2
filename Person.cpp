@@ -8,15 +8,15 @@ Person::Person() {
     this->m_id = 0;
 }
 Person::Person(const char *name, int id) {
-    strcpy(this->m_name, name);
+    name = strdup(name);
     this->m_id = id;
 }
 Person::Person(const Person &other) {
-    strcpy(this->m_name, other.m_name);
+    this->m_name = strdup(other.m_name);
     this->m_id = other.m_id;
 }
 Person::~Person() = default;
 void Person::SetId(int newId) { this->m_id = newId; }
-void Person::SetName(const char* newName) {  strcpy(this->m_name, newName); }
+void Person::SetName(const char* newName) {  this->m_name = strdup(newName); }
 int Person::GetId() const { return this->m_id; }
 char* Person::GetName() const { return this->m_name; }

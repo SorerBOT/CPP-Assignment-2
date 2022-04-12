@@ -8,20 +8,20 @@ Transaction::Transaction(Account *s, Account *d, double amount, const char *date
     this->m_source = s;
     this->m_destination = d;
     this->m_amount = amount;
-    strcpy(this->m_date, date);
+    this->m_date = strdup(date);
 }
 Transaction::Transaction(const Transaction &other): m_date(NULL){
     this->m_source = other.m_source;
     this->m_destination = other.m_destination;
     this->m_amount = other.m_amount;
-    strcpy(this->m_date, other.m_date);
+    this->m_date = strdup(other.m_date);
 }
 
 void Transaction::SetAmount(double amount) {
     this->m_amount = amount;
 }
 void Transaction::SetDate(const char* date) {
-    strcpy(this->m_date, date);
+    this->m_date = strdup(date);
 }
 void Transaction::SetDes(Account* dst) {
     this->m_destination = dst;
