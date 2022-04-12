@@ -48,6 +48,7 @@ int Bank::GetCode() const { return this->m_bankCode; }
 
 void Bank::AddAccount(const Account &account) {
     int iteration;
+    for (iteration = 0; iteration < this->m_numbeOfAccounts; iteration++) if (this->m_account[iteration]->GetAccountNumber() == account.GetAccountNumber()) return;
     auto** accountsArray = new Account*[this->m_numbeOfAccounts + 1];
     for (iteration = 0; iteration < this->m_numbeOfAccounts; iteration++) accountsArray[iteration] = new Account(*this->m_account[iteration]);
     accountsArray[this->m_numbeOfAccounts] = new Account(account);
