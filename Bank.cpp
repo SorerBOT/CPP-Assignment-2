@@ -23,7 +23,9 @@ Bank::~Bank() {
     for (iteration = 0; iteration < this->m_numbeOfAccounts; iteration++) delete this->m_account[iteration];
     delete[] this->m_account;
 }
-
+void Bank::SetBankName(const char *name) { strcpy(this->m_name, name); }
+void Bank::SetCode(int code)             { this->m_bankCode = code; }
+void Bank::SetTotal(double total) { this->m_totalBalance = total; }
 void Bank::SetAccount(Account **account, int numbeOfAccounts) {
     int iteration;
     for (iteration = 0; iteration < this->m_numbeOfAccounts; iteration++) delete this->m_account[iteration];
@@ -37,3 +39,4 @@ void Bank::SetAccount(Account **account, int numbeOfAccounts) {
     for (iteration = 0; iteration < numbeOfAccounts; iteration++) delete account[iteration];
     delete[] account;
 }
+
