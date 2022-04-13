@@ -60,16 +60,17 @@ int main() //Train
     if( bank.GetAccounts()[0]->GetBalance() != currentA - 500 )
         cout << "Error in update the balance of the account (-4)" << endl;
 
-//    if( bank.GetAccounts()[1]->GetBalance() != currentB + 500 )
-//        cout << "Error in update the balance of the other account (-4)" << currentA << endl;
-//
-//    currentC = bank.GetAccounts()[2]->GetBalance();
-//    bank.GetAccounts()[2]->Deposit( 555, "11-04-18" );
-//    if( bank.GetAccounts()[2]->GetNumOfTransactions() != 2 )
-//        cout << "Error in number of transaction (-4)" << endl;
-//
-//    if( bank.GetAccounts()[2]->GetBalance() != 2260 )
-//        cout << "Error in balance after transaction (-4)" << endl;
+    if( bank.GetAccounts()[1]->GetBalance() != currentB + 500 )
+        cout << "Error in update the balance of the other account (-4)" << currentA << endl;
+
+    currentC = bank.GetAccounts()[2]->GetBalance();
+    bank.GetAccounts()[2]->Deposit( 555, "11-04-18" );
+    if( bank.GetAccounts()[2]->GetNumOfTransactions() != 1 )
+        cout << "Error in number of transaction (-4)" << endl;
+
+
+    if( bank.GetAccounts()[2]->GetBalance() != 2260 )
+        cout << "Error in balance after transaction (-4)" << endl;
 
     /*****************************E**************************************/
 //    account.DeletePerson( lior );
