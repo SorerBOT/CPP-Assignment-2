@@ -86,11 +86,14 @@ void Bank::DeleteAccount(const Account& account) {
     this->SetTotal(this->GetTotal() - account.GetBalance());
     auto** accountArray = new Account*[this->m_numbeOfAccounts - 1];
     for (iteration = 0; iteration < this->m_numbeOfAccounts; iteration++) {
-        if (this->m_account[iteration]->GetAccountNumber() == account.GetAccountNumber()) continue;
+        if (this->m_account[iteration]->GetAccountNumber() == account.GetAccountNumber()) { delete this->m_account[iteration]; continue; }
         accountArray[iteration] = new Account(*this->m_account[iteration]);
     }
+    if (!(this->m_numbeOfAccounts - 1)) { delete[] this->m_account; return; };
     this->SetAccount(accountArray, this->m_numbeOfAccounts - 1);
-
     for (iteration = 0; iteration < this->m_numbeOfAccounts; iteration++) delete accountArray[iteration];
     delete[] accountArray;
+}
+void Bank::DeletePerson(const Person &p) {
+
 }
