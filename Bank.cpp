@@ -33,7 +33,10 @@ void Bank::SetAccount(Account **account, int numbeOfAccounts) {
     this->m_numbeOfAccounts = numbeOfAccounts;
     this->m_account = new Account*[this->m_numbeOfAccounts];
 
-    for (iteration = 0; iteration < this->m_numbeOfAccounts; iteration++) this->m_account[iteration] = new Account(*account[iteration]);
+    for (iteration = 0; iteration < this->m_numbeOfAccounts; iteration++)  {
+        this->m_account[iteration] = new Account(*account[iteration]);
+        this->m_account[iteration]->SetAccountNumber(iteration + 1);
+    }
 }
 
 const char* Bank::GetBankName() const { return this->m_name; }

@@ -36,14 +36,13 @@ int main() //Train
     if( bank.GetNumberOfAccounts() != 1 )
         cout << "Error in updating the a count of account in the bank(-4)" << endl;
 
-
     bank.AddAccount( Account( Person( "Dor Levi", 32145672 ), 10 ) );
-//    if( bank.GetTotal() != 15010 )
-//        cout << "Error in adding a new account to the bank (-4)" << endl;
+    if( bank.GetTotal() != 15010 )
+        cout << "Error in adding a new account to the bank (-4)" << endl;
 
-//    if( bank.GetNumberOfAccounts() != 2 )
-//        cout << "Error in updating the a count of account in the bank(-4)" << endl;
-////
+    if( bank.GetNumberOfAccounts() != 2 )
+        cout << "Error in updating the a count of account in the bank(-4)" << endl;
+//
 //    /*****************************D**************************************/
 //    currentA = bank.GetAccounts()[0]->GetBalance();
 //    currentB = bank.GetAccounts()[1]->GetBalance();
