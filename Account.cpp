@@ -146,6 +146,9 @@ void Account::AddTransaction(const Transaction &newTransaction) {
     newTransaction.GetDes()->SetTransactions(transactionArray, newTransaction.GetDes()->m_numberOfTransaction + 1);
     for (iteration = 0; iteration < newTransaction.GetDes()->m_numberOfTransaction; iteration++) delete newTransaction.GetSource()->m_transactionList[iteration];
     delete[] transactionArray;
+
+    newTransaction.GetSource()->SetBalance(newTransaction.GetSource()->GetBalance() - newTransaction.GetAmount());
+    newTransaction.GetDes()->SetBalance(newTransaction.GetDes()->GetBalance() + newTransaction.GetAmount());
 }
 void Account::DeletePerson(const Person &oldPerson) {
     int iteration, indicator = 0;

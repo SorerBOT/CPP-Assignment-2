@@ -65,7 +65,7 @@ void Bank::AddPerson(const Person &newPerson, const Account &account, double amo
     bool flag = false;
     for (iteration = 0; iteration < this->m_numbeOfAccounts; iteration++) {
         if (this->m_account[iteration]->GetAccountNumber() != account.GetAccountNumber()) continue;
-        for (indicator = 0; indicator < this->m_account[iteration]->GetTotalPersons(); iteration++) {
+        for (indicator = 0; indicator < this->m_account[iteration]->GetTotalPersons(); indicator++) {
             if (this->m_account[iteration]->GetPersons()[indicator]->GetId() == newPerson.GetId()) return;
         }
         index = iteration;
