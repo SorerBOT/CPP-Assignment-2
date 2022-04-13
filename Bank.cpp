@@ -95,5 +95,8 @@ void Bank::DeleteAccount(const Account& account) {
     delete[] accountArray;
 }
 void Bank::DeletePerson(const Person &p) {
-
+    int iteration, index;
+    for (iteration = 0; iteration < this->m_numbeOfAccounts; iteration++) {
+        this->m_account[iteration]->DeletePerson(p);
+    }
 }
