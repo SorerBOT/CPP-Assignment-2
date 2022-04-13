@@ -8,7 +8,7 @@ Person::Person() {
     this->m_id = 0;
 }
 Person::Person(const char *name, int id) {
-    name = strdup(name);
+    this->m_name = strdup(name);
     this->m_id = id;
 }
 Person::Person(const Person &other) {

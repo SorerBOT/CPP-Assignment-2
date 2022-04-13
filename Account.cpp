@@ -7,9 +7,9 @@ Account::Account() {
     this->m_transactionList = NULL;
     this->m_numberOfTransaction = 0;
     this->m_persons = NULL;
-    this->m_totalPersons = NULL;
-    this->m_accountNumber = NULL;
-    this->m_balance = NULL;
+    this->m_totalPersons = 0;
+    this->m_accountNumber = 0;
+    this->m_balance = 0;
 }
 Account::Account(const Account &other) {
     int iteration;
@@ -28,13 +28,12 @@ Account::Account(const Account &other) {
         this->m_transactionList[iteration] = new Transaction(*other.m_transactionList[iteration]);
     }
 }
-Account::Account(const Person &person, double balance) {
+Account::Account(const Person &person, double balance): m_persons(new Person*[1]) {
     this->m_numberOfTransaction = 0;
     this->m_transactionList = NULL;
     this->m_accountNumber = 0;
     this->m_balance = balance;
     this->m_totalPersons = 1;
-    this->m_persons = new Person*[this->m_totalPersons];
     this->m_persons[0] = new Person(person);
 }
 Account::Account(Person **persons, int count, double balance) {
@@ -154,7 +153,7 @@ void Account::DeletePerson(const Person &oldPerson) {
         if (this->m_persons[iteration]->GetId() == oldPerson.GetId()) { indicator = 1; break; }
     }
     if (!indicator) return;
-    if (m_totalPersons == 1) {  delete this->m_persons[0]; delete[] m_persons; return;}
+    if (m_totalPersons == 1) {  delete this->m_persons[0]; delete[] m_persons; delete this; return;}
     auto** personArray = new Person*[this->m_totalPersons - 1];
     for (iteration = 0; iteration < this->m_totalPersons; iteration++) {
         if (this->m_persons[iteration]->GetId() == oldPerson.GetId()) { indicator = 1; continue; }

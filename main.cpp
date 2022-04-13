@@ -5,44 +5,45 @@ using namespace std;
 
 int main() //Train
 {
-//    Bank bank( "The First International Bank of Israel​ Ltd", 31 );
-//    Account account;
-//    Person lior( "Lior Li", 20145876 );
-//    Person liam( "Liam Winter", 2048741 );
-//    int countNumberOfUsers = account.GetTotalPersons();
-//    double currentA, currentB, currentC;
-//
-//    /*****************************A**************************************/
-//    if( 0 != strcmp(bank.GetBankName(), "The First International Bank of Israel​ Ltd" ) )
-//        cout << "Error in creating a bank object(-4)" << endl;
-//
-//    /*****************************B**************************************/
-//    account.AddPerson( Person( "Amit Choen", 30292827 ), 10000 );
-//    if( account.GetTotalPersons() != 1 )
-//        cout << "Error in adding a new Person to an account(-4)" << endl;
-//
-//    account.AddPerson( lior, 5000 );
-//    if( account.GetPersons()[1]->GetId() != 20145876 )
-//        cout << "Error in adding a Person to the account(-4)" << endl;
-//
-//    if( account.GetBalance() != 15000 )
-//        cout << "Error in adding a Person to the account(-4)" << endl;
-//
-//    /*****************************C**************************************/
-//    bank.AddAccount( account );
-//    if( bank.GetTotal() != 15000 )
-//        cout << "Error in adding an account to the bank(-4)" << endl;
-//
-//    if( bank.GetNumberOfAccounts() != 1 )
-//        cout << "Error in updating the a count of account in the bank(-4)" << endl;
-//
+    Bank bank( "The First International Bank of Israel​ Ltd", 31 );
+    Account account;
+    Person lior( "Lior Li", 20145876 );
+    Person liam( "Liam Winter", 2048741 );
+    int countNumberOfUsers = account.GetTotalPersons();
+    double currentA, currentB, currentC;
+
+    /*****************************A**************************************/
+    if( 0 != strcmp(bank.GetBankName(), "The First International Bank of Israel​ Ltd" ) )
+        cout << "Error in creating a bank object(-4)" << endl;
+
+    /*****************************B**************************************/
+    account.AddPerson( Person( "Amit Choen", 30292827 ), 10000 );
+    if( account.GetTotalPersons() != 1 )
+        cout << "Error in adding a new Person to an account(-4)" << endl;
+
+    account.AddPerson( lior, 5000 );
+    if( account.GetPersons()[1]->GetId() != 20145876 )
+        cout << "Error in adding a Person to the account(-4)" << endl;
+
+    if( account.GetBalance() != 15000 )
+        cout << "Error in adding a Person to the account(-4)" << endl;
+
+    /*****************************C**************************************/
+    bank.AddAccount( account );
+    if( bank.GetTotal() != 15000 )
+        cout << "Error in adding an account to the bank(-4)" << endl;
+
+    if( bank.GetNumberOfAccounts() != 1 )
+        cout << "Error in updating the a count of account in the bank(-4)" << endl;
+    auto person = Person("Dor Levi", 32145672);
+    Account test(Person("Dor Levi", 32145672), 10);
 //    bank.AddAccount( Account( Person( "Dor Levi", 32145672 ), 10 ) );
 //    if( bank.GetTotal() != 15010 )
 //        cout << "Error in adding a new account to the bank (-4)" << endl;
-//
+
 //    if( bank.GetNumberOfAccounts() != 2 )
 //        cout << "Error in updating the a count of account in the bank(-4)" << endl;
-//
+////
 //    /*****************************D**************************************/
 //    currentA = bank.GetAccounts()[0]->GetBalance();
 //    currentB = bank.GetAccounts()[1]->GetBalance();
