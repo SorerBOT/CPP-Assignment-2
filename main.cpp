@@ -35,9 +35,9 @@ int main() //Train
 
     if( bank.GetNumberOfAccounts() != 1 )
         cout << "Error in updating the a count of account in the bank(-4)" << endl;
-    auto person = Person("Dor Levi", 32145672);
-    Account test(Person("Dor Levi", 32145672), 10);
-//    bank.AddAccount( Account( Person( "Dor Levi", 32145672 ), 10 ) );
+
+
+    bank.AddAccount( Account( Person( "Dor Levi", 32145672 ), 10 ) );
 //    if( bank.GetTotal() != 15010 )
 //        cout << "Error in adding a new account to the bank (-4)" << endl;
 
@@ -67,16 +67,6 @@ int main() //Train
 //
 //    currentC = bank.GetAccounts()[2]->GetBalance();
 //    bank.GetAccounts()[2]->Deposit( 555, "11-04-18" );
-//
-//    if( bank.GetAccounts()[2]->GetBalance() != currentC + 555 )
-//        cout << "Error in deposit to the account (-4)" << endl;
-//
-//    Transaction t( bank.GetAccounts()[0], bank.GetAccounts()[2], 500, "12-04-18" );
-//
-//    bank.GetAccounts()[1]->AddTransaction( t );
-//    if( bank.GetAccounts()[0]->GetNumOfTransactions() != 2 )
-//        cout << "Error in number of transaction (-4)" << endl;
-//
 //    if( bank.GetAccounts()[2]->GetNumOfTransactions() != 2 )
 //        cout << "Error in number of transaction (-4)" << endl;
 //
@@ -106,6 +96,18 @@ int main() //Train
 //    bank.DeletePerson( liam );
 //    if( 3 != bank.GetNumberOfAccounts() )
 //        cout << "Error in updating number of account in the bank(-4)" << endl;
+
+//    if( bank.GetAccounts()[2]->GetBalance() != currentC + 555 ) {
+//        cout << "Error in deposit to the account (-4)" << endl;
+//    }
+//
+//    Transaction t( bank.GetAccounts()[0], bank.GetAccounts()[2], 500, "12-04-18" );
+//
+//    bank.GetAccounts()[1]->AddTransaction( t );
+//    if( bank.GetAccounts()[0]->GetNumOfTransactions() != 2 ) {
+//        cout << "Error in number of transaction (-4)" << endl;
+//    }
+//
 
     cout << "done" << endl;
     return 0;
