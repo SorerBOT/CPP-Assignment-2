@@ -137,7 +137,7 @@ void Account::AddTransaction(const Transaction &newTransaction) {
 
     for (iteration = 0; iteration < newTransaction.GetSource()->m_numberOfTransaction; iteration++) delete newTransaction.GetSource()->m_transactionList[iteration];
     delete[] transactionArray;
-    if (newTransaction.GetSource()->m_accountNumber == newTransaction.GetDes()->m_accountNumber) return;
+    if (newTransaction.GetSource()->GetAccountNumber() == newTransaction.GetDes()->GetAccountNumber()) return;
     transactionArray = new Transaction*[newTransaction.GetDes()->m_numberOfTransaction + 1];
     for (iteration = 0; iteration < newTransaction.GetDes()->m_numberOfTransaction; iteration++) {
         transactionArray[iteration] = new Transaction(*newTransaction.GetDes()->m_transactionList[iteration]);
