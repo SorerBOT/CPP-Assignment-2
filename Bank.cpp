@@ -28,14 +28,10 @@ void Bank::SetCode(int code)             { this->m_bankCode = code; }
 void Bank::SetTotal(double total) { this->m_totalBalance = total; }
 void Bank::SetAccount(Account **account, int numbeOfAccounts) {
     int iteration;
-    for (iteration = 0; iteration < this->m_numbeOfAccounts; iteration++) delete this->m_account[iteration];
-    delete[] this->m_account;
     this->m_numbeOfAccounts = numbeOfAccounts;
     this->m_account = new Account*[this->m_numbeOfAccounts];
-
     for (iteration = 0; iteration < this->m_numbeOfAccounts; iteration++)  {
         this->m_account[iteration] = new Account(*account[iteration]);
-        this->m_account[iteration]->SetAccountNumber(iteration + 1);
     }
 }
 
@@ -47,18 +43,15 @@ int Bank::GetCode() const { return this->m_bankCode; }
 
 void Bank::AddAccount(const Account &account) {
     int iteration;
-    for (iteration = 0; iteration < this->m_numbeOfAccounts; iteration++) if (this->m_account[iteration]->GetAccountNumber() == account.GetAccountNumber()) return;
+    for (iteration = 0; iteration < this->m_numbeOfAccounts; iteration++)  if (this->m_account[iteration]->GetAccountNumber() == account.GetAccountNumber()) return;
     this->SetTotal(this->GetTotal() + account.GetBalance());
     auto** accountsArray = new Account*[this->m_numbeOfAccounts + 1];
-    for (iteration = 0; iteration < this->m_numbeOfAccounts; iteration++) accountsArray[iteration] = new Account(*this->m_account[iteration]);
+    for (iteration = 0; iteration < this->m_numbeOfAccounts; iteration++) accountsArray[iteration] = new Account(*this->GetAccounts()[iteration]);
     accountsArray[this->m_numbeOfAccounts] = new Account(account);
     this->SetAccount(accountsArray, this->m_numbeOfAccounts + 1);
-    for (iteration = 0; iteration < this->m_numbeOfAccounts; iteration++) delete accountsArray[iteration];
-    delete[] accountsArray;
 }
 void Bank::AddAccount(const Person &per, double amount) {
-    Account account(per, amount);
-    AddAccount(account);
+    AddAccount(Account(per, amount));
 }
 void Bank::AddPerson(const Person &newPerson, const Account &account, double amount) {
     int iteration, indicator, index;
@@ -78,31 +71,11 @@ void Bank::AddPerson(const Person &newPerson, const Account &account, double amo
     this->SetTotal(this->GetTotal() + amount);
 }
 void Bank::DeleteAccount(const Account& account) {
-    int iteration, index;
-    bool flag = false;
-    for (iteration = 0; iteration < this->m_numbeOfAccounts; iteration++) {
-        if (this->m_account[iteration]->GetAccountNumber() != account.GetAccountNumber()) continue;
-        index = iteration;
-        flag = true;
-        break;
-    }
-    if (!flag) return;
-    this->SetTotal(this->GetTotal() - account.GetBalance());
-    auto** accountArray = new Account*[this->m_numbeOfAccounts - 1];
-    for (iteration = 0; iteration < this->m_numbeOfAccounts; iteration++) {
-        if (this->m_account[iteration]->GetAccountNumber() == account.GetAccountNumber()) { delete this->m_account[iteration]; continue; }
-        accountArray[iteration] = new Account(*this->m_account[iteration]);
-    }
-    if (!(this->m_numbeOfAccounts - 1)) { delete[] this->m_account; return; };
-    this->SetAccount(accountArray, this->m_numbeOfAccounts - 1);
-    for (iteration = 0; iteration < this->m_numbeOfAccounts; iteration++) delete accountArray[iteration];
-    delete[] accountArray;
+    delete &account;
 }
 void Bank::DeletePerson(const Person &p) {
-    int iteration, indicator;
+    int iteration;
     for (iteration = 0; iteration < this->m_numbeOfAccounts; iteration++) {
-
-
         this->m_account[iteration]->DeletePerson(p);
     }
 }
