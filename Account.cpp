@@ -1,8 +1,10 @@
-//
-// Created by sorer on 10/04/2022.
-//
+/*
+* Name: Alon Filler
+* ID: 216872374
+* */
 
 #include "Account.h"
+// Blank Account constructor.
 Account::Account() {
     this->m_transactionList = NULL;
     this->m_numberOfTransaction = 0;
@@ -11,6 +13,7 @@ Account::Account() {
     this->m_accountNumber = 0;
     this->m_balance = 0;
 }
+// Account copy constructor.
 Account::Account(const Account &other) {
     int iteration;
     this->m_accountNumber = other.m_accountNumber;
@@ -27,6 +30,7 @@ Account::Account(const Account &other) {
         this->m_transactionList[iteration] = new Transaction(*other.m_transactionList[iteration]);
     }
 }
+// Account constructor, generates an account out of a Person reference.
 Account::Account(const Person &person, double balance): m_persons(new Person*[1]) {
     this->m_numberOfTransaction = 0;
     this->m_transactionList = NULL;
@@ -35,6 +39,7 @@ Account::Account(const Person &person, double balance): m_persons(new Person*[1]
     this->m_totalPersons = 1;
     this->m_persons[0] = new Person(person);
 }
+// Account constructor, generates an account out of an array of pointers to Persons.
 Account::Account(Person **persons, int count, double balance) {
     int iteration;
     this->m_numberOfTransaction = 0;
@@ -49,21 +54,28 @@ Account::Account(Person **persons, int count, double balance) {
         this->m_persons[iteration] = new Person(*persons[iteration]);
     }
 }
+// Account destructor.
 Account::~Account() {
     this->clearPersons();
     this->clearTransactions();
 }
-
+// Returns the m_persons member of  an Account.
 Person** Account::GetPersons() const { return this->m_persons; }
+// Returns the m_accountNumber member of an Account.
 int Account::GetAccountNumber() const { return this->m_accountNumber; }
+// Returns the m_balance member of an Account.
 double Account::GetBalance() const { return this->m_balance; }
+// Returns the m_numberOfTransaction of an Account.
 int Account::GetNumOfTransactions() { return this->m_numberOfTransaction; }
+// Returns the m_totalPersons member of an Account.
 int Account::GetTotalPersons() const { return this->m_totalPersons; }
+// Returns the m_transactionList member of an account.
 Transaction **Account::GetTransactions() { return this->m_transactionList; }
-
+// Sets the m_accountNumber member of an Account.
 void Account::SetAccountNumber(int number) { this->m_accountNumber = number; }
+// Sets the m_balance member of an Account.
 void Account::SetBalance(double balance) { this->m_balance = balance; }
-
+// Sets the m_persons member of an Account.
 void Account::SetPersons(Person **persons, int count) {
     int iteration;
     delete[] this->m_persons;
@@ -73,7 +85,7 @@ void Account::SetPersons(Person **persons, int count) {
         this->m_persons[iteration] = new Person(*persons[iteration]);
     }
 }
-
+// Sets the m_transactionList member of an account.
 void Account::SetTransactions(Transaction **newTransaction, int count) {
     int iteration;
     for (iteration = 0; iteration < this->m_numberOfTransaction; iteration++) {
@@ -87,7 +99,7 @@ void Account::SetTransactions(Transaction **newTransaction, int count) {
         this->m_transactionList[iteration] = new Transaction(*newTransaction[iteration]);
     }
 }
-
+// Clears all the Persons associated with an Account.
 void Account::clearPersons() {
     int iteration;
     for (iteration = 0; iteration < this->m_totalPersons; iteration++) {
@@ -96,7 +108,7 @@ void Account::clearPersons() {
     delete[] this->m_persons;
     this->m_totalPersons = 0;
 }
-
+// Clears all the Transactions associated with an Account.
 void Account::clearTransactions() {
     int iteration;
     for (iteration = 0; iteration < this->m_numberOfTransaction; iteration++) {
@@ -104,6 +116,7 @@ void Account::clearTransactions() {
     }
     delete[] this->m_transactionList;
 }
+// Adds a Person to the Account's Persons Array.
 void Account::AddPerson(const Person &newPerson, double amount) {
     int iteration;
     for (iteration = 0; iteration < this->m_totalPersons; iteration++) if (this->m_persons[iteration]->GetId() == newPerson.GetId()) return;
@@ -115,6 +128,7 @@ void Account::AddPerson(const Person &newPerson, double amount) {
     for (iteration = 0; iteration < this->m_totalPersons; iteration++) delete personArray[iteration];
     delete[] personArray;
 }
+// Adds a Transaction to the Account's Transactions Array.
 void Account::AddTransaction(const Transaction &newTransaction) {
     int iteration;
     auto** transactionArray = new Transaction*[newTransaction.GetSource()->m_numberOfTransaction + 1];
@@ -137,6 +151,7 @@ void Account::AddTransaction(const Transaction &newTransaction) {
     newTransaction.GetSource()->SetBalance(newTransaction.GetSource()->GetBalance() - newTransaction.GetAmount());
     newTransaction.GetDes()->SetBalance(newTransaction.GetDes()->GetBalance() + newTransaction.GetAmount());
 }
+// Deletes a Person from the Account's Persons Array.
 void Account::DeletePerson(const Person &oldPerson) {
     int iteration, index;
     bool flag = false;
@@ -160,11 +175,13 @@ void Account::DeletePerson(const Person &oldPerson) {
     }
     this->SetPersons(personsArray, this->GetTotalPersons() - 1);
 }
+// Creates a Transaction between a user to himself where money is withdrawn from the Account.
 void Account::Withdraw(double amount, const char *date) {
     this->SetBalance(this->m_balance - amount);
     Transaction transaction(this, this, -1 * amount, date);
     this->AddTransaction(transaction);
 }
+// Creates a Transaction between a user to himself where money is deposited into the Account.
 void Account::Deposit(double amount, const char *date) {
     this->SetBalance(this->m_balance + amount);
     Transaction transaction(this, this, amount, date);
