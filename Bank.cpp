@@ -71,11 +71,34 @@ void Bank::AddPerson(const Person &newPerson, const Account &account, double amo
     this->SetTotal(this->GetTotal() + amount);
 }
 void Bank::DeleteAccount(const Account& account) {
-    delete &account;
+    int iteration, index;
+    bool flag = false;
+
+    for(iteration = 0; iteration <  this->GetNumberOfAccounts(); iteration++) {
+        if (this->GetAccounts()[iteration]->GetAccountNumber() != account.GetAccountNumber()) continue;
+        this->SetTotal(this->GetTotal() - account.GetBalance());
+        if (this->GetNumberOfAccounts() == 1) {
+            delete this->m_account[0];
+            delete this->m_account;
+            return;
+        }
+        flag = true;
+        break;
+    }
+    if (!flag) return;
+
+    auto** accountsArray = new Account*[this->GetNumberOfAccounts() - 1];
+    for (index = 0; index < this->GetNumberOfAccounts(); index++) {
+        if (index == iteration) continue;
+        accountsArray[index] = new Account(*this->GetAccounts()[index]);
+    }
+    this->SetAccount(accountsArray, this->GetNumberOfAccounts() - 1);
 }
 void Bank::DeletePerson(const Person &p) {
-    int iteration;
+    int iteration, initialAmountOfPersons;
     for (iteration = 0; iteration < this->m_numbeOfAccounts; iteration++) {
-        this->m_account[iteration]->DeletePerson(p);
+        initialAmountOfPersons = this->GetAccounts()[iteration]->GetTotalPersons();
+        this->GetAccounts()[iteration]->DeletePerson(p);
+        if (initialAmountOfPersons > this->GetAccounts()[iteration]->GetTotalPersons()) this->DeleteAccount(*this->GetAccounts()[iteration]);
     }
 }

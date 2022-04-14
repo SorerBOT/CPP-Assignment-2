@@ -145,6 +145,8 @@ void Account::DeletePerson(const Person &oldPerson) {
         if (this->GetTotalPersons() == 1) {
             delete this->m_persons[iteration];
             delete[] this->m_persons;
+            this->m_totalPersons = 0;
+            return;
         }
         flag = true;
         break;
